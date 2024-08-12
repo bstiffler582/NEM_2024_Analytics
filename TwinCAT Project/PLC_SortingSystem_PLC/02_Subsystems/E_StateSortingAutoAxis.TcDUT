@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <DUT Name="E_StateSortingAutoAxis" Id="{05595c70-86ae-4a78-9459-ddd2f0dd335e}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_StateSortingAutoAxis :
+(
+	WaitForCylinderAtWorkPos := 0,
+	MoveAxis,
+	StopAxis
+);
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

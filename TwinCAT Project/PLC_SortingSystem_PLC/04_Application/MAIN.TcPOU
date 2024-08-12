@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="MAIN" Id="{0b724133-64e7-4023-8c2b-e1f63f11d835}" SpecialFunc="None">
+    <Declaration><![CDATA[(* =======================================================================================================================================
+   OOP: Extended sample
+   =======================================================================================================================================
+   Description: 
+   This PLC sample contains an object-oriented program to control a sorting system.
+   The application can be controlled via an integrated visualization.
+   
+   PLC_SortingSystem_PLC:
+   The functionality of the sorting system is implemented within this PLC project (PLC_SortingSystem_PLC).
+   It also contains the visualization to control the application.
+   
+   PLC_SortingSystem_Simu:
+   To run the project without hardware, the simulation PLC can be used.
+   For example, It simulates the cylinder positions and temperatures, as well as the sensor signals (correspondent to the box positions). 
+   =======================================================================================================================================
+   InfoSys:
+   https://infosys.beckhoff.de/content/1033/tc3_sampleprogram1/45035996374683915.html?id=6126826020926170206
+   https://infosys.beckhoff.de/content/1033/tc3_plc_intro/72057596565231755.html?id=3937754078542861062
+   ======================================================================================================================================= *)
+PROGRAM MAIN
+VAR
+	fbMachine						: FB_Machine;
+	
+	//Added Variables
+	Plastic_ActPos			AT %Q* 	: LREAL;
+	Plastic_ActVelo			AT %Q* 	: LREAL;
+	Metal_ActPos			AT %Q* 	: LREAL;
+	Metal_ActVelo			AT %Q* 	: LREAL;
+	Separating_ActPos		AT %Q* 	: LREAL;
+	Separating_ActVelo		AT %Q* 	: LREAL;
+	
+	{attribute 'TcAnalytics'}
+	eMachineState			AT %Q*	: E_MachineMode;
+	
+	sNetId	: STRING;
+	fbGetLocalNetId	:	FB_GetLocalAmsNetId;
+	bBusy	: BOOL;
+	bInit	: BOOL;
+	
+	fbConveyorTimerPlastic			: TON;
+	fbConveyorTimerMetal			: TON;
+	fbConveyorTimerSeparating		: TON;
+	tErrorTime						: TIME := T#60M;	
+	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// =========================================================
+
+fbMachine();
+
+// =========================================================
+
+Plastic_ActPos := MAIN.fbMachine.fbPlasticSorting.fbAxis.AxisRef.NcToPlc.ActPos;
+Plastic_ActVelo := MAIN.fbMachine.fbPlasticSorting.fbAxis.AxisRef.NcToPlc.ActVelo;
+
+Metal_ActPos := MAIN.fbMachine.fbMetalSorting.fbAxis.AxisRef.NcToPlc.ActPos;
+Metal_ActVelo := MAIN.fbMachine.fbMetalSorting.fbAxis.AxisRef.NcToPlc.ActVelo;
+
+Separating_ActPos := MAIN.fbMachine.fbSeparateModule.fbAxis.AxisRef.NcToPlc.ActPos;
+Separating_ActVelo := MAIN.fbMachine.fbSeparateModule.fbAxis.AxisRef.NcToPlc.ActVelo;
+
+//Handle Conveyor Threshold Overrun
+//IF Separating_ActPos > 10000000 THEN
+	
+//END_IF
+
+//New Machine Enum
+
+IF fbMachine.fbVisu.bIdle THEN
+	eMachineState := 0;
+ELSIF NOT fbMachine.fbVisu.bButtonPowerIn THEN
+	eMachineState := 3;
+ELSIF fbMachine.fbVisu.bStarted THEN
+	eMachineState := 1;
+ELSIF fbMachine.fbVisu.bStopped THEN
+	eMachineState := 2;
+ELSIF fbMachine.fbVisu.bButtonStartIn THEN
+	eMachineState := 4;
+ELSIF fbMachine.fbVisu.bButtonStopIn THEN
+	eMachineState := 5;
+ELSIF fbMachine.fbVisu.bButtonAbortIn THEN
+	eMachineState := 6;
+ELSIF fbMachine.fbVisu.bReset THEN
+	eMachineState := 7;
+END_IF
+
+IF NOT bInit THEN
+bInit := GetLocalAmsNetId();
+END_IF ]]></ST>
+    </Implementation>
+    <Method Name="GetLocalAmsNetId" Id="{9d950b93-0e8c-4089-b8bf-fc7f4c56b0d0}">
+      <Declaration><![CDATA[METHOD GetLocalAmsNetId : BOOL;
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbGetLocalNetId(
+	bExecute:= NOT bBusy, 
+	bBusy=> bBusy,
+	AddrString=> sNetId);
+	
+IF NOT ((sNetId = '') OR (sNetId = '0.0.0.0.0.0')) THEN
+	GetLocalAmsNetId := TRUE;
+	RETURN;
+END_IF
+
+GetLocalAmsNetId := FALSE;
+RETURN;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="MAIN">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="304" Count="0" />
+      <LineId Id="300" Count="0" />
+      <LineId Id="298" Count="0" />
+      <LineId Id="302" Count="1" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="149" Count="0" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="211" Count="0" />
+      <LineId Id="210" Count="0" />
+      <LineId Id="157" Count="0" />
+      <LineId Id="207" Count="0" />
+      <LineId Id="159" Count="0" />
+      <LineId Id="208" Count="0" />
+      <LineId Id="163" Count="1" />
+      <LineId Id="166" Count="1" />
+      <LineId Id="169" Count="0" />
+      <LineId Id="168" Count="0" />
+      <LineId Id="171" Count="0" />
+      <LineId Id="170" Count="0" />
+      <LineId Id="153" Count="1" />
+      <LineId Id="251" Count="1" />
+      <LineId Id="93" Count="0" />
+    </LineIds>
+    <LineIds Name="MAIN.GetLocalAmsNetId">
+      <LineId Id="3" Count="10" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

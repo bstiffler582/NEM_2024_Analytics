@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_CylinderDiag" Id="{b98e6e0a-c06c-4bfd-9411-67daeb0dbabb}" SpecialFunc="None">
+    <Declaration><![CDATA[(* FB_CylinderDiag	- number of control signals:
+							one direction is controllable
+					- type of feedback signal:
+							feedback in base and work position
+					- with position diagnosis						*)
+					
+FUNCTION_BLOCK FB_CylinderDiag EXTENDS FB_Cylinder
+VAR_INPUT
+	tTimeOut 	 		: TIME;					// Time for watchdog that monitores if cylinder reaches base/work position
+	fVibrationSensor	AT %I*	: LREAL;		// Hardware input signal: cylinder vibration
+	fPressureSensor		AT %I*	: LREAL;		// Hardware input signal: cylinder pressure
+END_VAR
+VAR_OUTPUT
+	bError				: BOOL;			// Error signal (diagnosed from position watchdog)
+	sErrorMsg			: STRING;		// Error message
+END_VAR
+VAR
+	fbTriggerError		: R_TRIG;		// Trigger to recognize rising edge of error
+	bErrorMove			: BOOL;			// Move error
+	fbTimerWatchDog		: TON;			// Watchdog timer for monitoring if cylinder reaches base/work position
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// =========================================================
+;
+// =========================================================]]></ST>
+    </Implementation>
+    <Method Name="Diag" Id="{f79f365d-dffb-4a7d-9fa6-75d28cecb63b}">
+      <Declaration><![CDATA[METHOD PROTECTED Diag
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// =========================================================
+// Timer starts when cylinder is not in base and work position
+	
+	IF NOT bAtBasePos AND NOT bAtWorkPos THEN
+		fbTimerWatchDog(IN := TRUE,
+						PT := tTimeOut);
+	ELSE
+		fbTimerWatchDog(IN := FALSE,
+						PT := tTimeOut);
+	END_IF
+
+// =========================================================
+// Error if cylinder does not reach base or work position
+	
+	fbTriggerError(CLK := fbTimerWatchDog.Q);
+	
+	bError := fbTimerWatchDog.Q;
+	
+	IF fbTriggerError.Q THEN
+		bErrorMove := bMoveToWork;
+	END_IF
+	
+	IF bError THEN
+		IF bErrorMove = bMoveToWork THEN
+			IF bMoveToWork THEN
+				sErrorMsg := 'Work position not reached';
+			ELSE
+				sErrorMsg := 'Base position not reached';
+			END_IF
+		ELSE
+			bError := FALSE;
+			sErrorMsg := '';
+		END_IF
+	ELSE
+		sErrorMsg := '';
+	END_IF
+
+// =========================================================]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Reset" Id="{4201fe92-72e6-40bb-ba50-b855cb4acd15}">
+      <Declaration><![CDATA[METHOD Reset
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// =========================================================
+
+// Calling method Reset of base class FB_Cylinder via 'SUPER^.'
+SUPER^.Reset();		
+
+// Reset error
+bError 		:= FALSE;
+sErrorMsg 	:= '';
+
+// =========================================================]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StateMachine" Id="{28ea0f6a-96f6-4957-90a0-49a2f6f68a26}">
+      <Declaration><![CDATA[METHOD PROTECTED StateMachine
+VAR_INPUT
+	bBasePosReq		: BOOL;
+	bWorkPosReq		: BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// =========================================================
+
+IF NOT bError THEN
+	// Calling method StateMachine of base class FB_Cylinder via 'SUPER^.'
+	SUPER^.StateMachine(bBasePosReq := bBasePosReq,
+						bWorkPosReq	:= bWorkPosReq );
+	
+	// Diagnosis
+	Diag();
+END_IF
+
+// =========================================================]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_CylinderDiag">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CylinderDiag.Diag">
+      <LineId Id="3" Count="36" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CylinderDiag.Reset">
+      <LineId Id="3" Count="8" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CylinderDiag.StateMachine">
+      <LineId Id="3" Count="10" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

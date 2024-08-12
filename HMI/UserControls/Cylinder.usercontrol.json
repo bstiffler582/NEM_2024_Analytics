@@ -1,0 +1,60 @@
+{
+  "parameters": [
+    {
+      "name": "data-tchmi-actuate",
+      "displayName": "Actuate",
+      "allowSymbolExpressionsInObject": false,
+      "visible": true,
+      "type": "tchmi:general#/definitions/Boolean",
+      "category": "",
+      "description": "",
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": true,
+      "propertyName": "Actuate",
+      "propertySetterName": "setActuate",
+      "propertyGetterName": "getActuate",
+      "refTo": ""
+    },
+    {
+      "name": "data-tchmi-discretecontrol",
+      "displayName": "DiscreteControl",
+      "allowSymbolExpressionsInObject": false,
+      "visible": true,
+      "type": "tchmi:general#/definitions/Boolean",
+      "category": "",
+      "description": "",
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": true,
+      "propertyName": "DiscreteControl",
+      "propertySetterName": "setDiscreteControl",
+      "propertyGetterName": "getDiscreteControl",
+      "refTo": ""
+    },
+    {
+      "name": "data-tchmi-stroke",
+      "displayName": "Stroke",
+      "allowSymbolExpressionsInObject": false,
+      "visible": true,
+      "type": "tchmi:general#/definitions/Number",
+      "category": "",
+      "description": "",
+      "defaultValue": 100.0,
+      "defaultValueInternal": 100.0,
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": true,
+      "propertyName": "Stroke",
+      "propertySetterName": "setStroke",
+      "propertyGetterName": "getStroke",
+      "refTo": ""
+    }
+  ],
+  "virtualRights": [],
+  "$schema": "./../../Packages/Beckhoff.TwinCAT.HMI.Framework.12.760.59/runtimes/native1.12-tchmi/Schema/UserControlConfig.Schema.json",
+  "description": ""
+}

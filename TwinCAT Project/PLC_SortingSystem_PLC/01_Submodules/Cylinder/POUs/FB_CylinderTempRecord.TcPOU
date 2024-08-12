@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.2">
+  <POU Name="FB_CylinderTempRecord" Id="{2ce3cbbc-233d-4b7c-ab14-1cacd6242d1b}" SpecialFunc="None">
+    <Declaration><![CDATA[(* FB_CylinderTempRecord	- number of control signals:
+									one direction is controllable
+							- type of feedback signal:
+									feedback in base and work position
+							- with temperature recording for data analysis		*)
+
+FUNCTION_BLOCK FB_CylinderTempRecord EXTENDS FB_CylinderTemp
+VAR_INPUT
+	bRecordStart		: BOOL;						// Signal to start the temperature recording
+	tIntervalTime		: TIME;						// Time of intervals to record the temperature 
+END_VAR
+VAR_OUTPUT
+	bRecordDone			: BOOL;						// True if the temperature recording is done
+	aTemps				: ARRAY[1..100] OF LREAL;	// Array with recorded temperatures
+END_VAR
+VAR
+	fbTimerInterval		: TON;						// Timer to control the recording interval
+	nIndex				: INT;						// Index to handle temperature array
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// =========================================================
+;
+// =========================================================]]></ST>
+    </Implementation>
+    <Method Name="Record" Id="{0f70c999-2d3c-4955-9049-a6f6f71c9a4c}">
+      <Declaration><![CDATA[METHOD Record
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// =========================================================
+// Recording array filled
+	
+	bRecordDone := (nIndex = 100);
+
+// =========================================================
+// Recording temperatures
+	
+	IF bRecordStart AND NOT bRecordDone AND NOT fbTimerInterval.Q THEN
+		fbTimerInterval(IN := TRUE,
+						PT := tIntervalTime );
+	END_IF
+	
+	IF fbTimerInterval.Q THEN
+		fbTimerInterval(IN := FALSE);
+		
+		nIndex 			:= nIndex + 1;
+		aTemps[nIndex] 	:= fTempCurrent;
+	END_IF
+
+// =========================================================]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Reset" Id="{495f7144-4845-4515-a74d-ec16e7445f79}">
+      <Declaration><![CDATA[METHOD Reset
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// =========================================================
+
+// Calling method Reset of base class FB_Cylinder via 'SUPER^.'
+SUPER^.Reset();
+
+// Reset temperature array
+FOR nIndex := 1 TO 100 BY 1 DO
+	aTemps[nIndex] := 0;
+END_FOR
+
+// Reset index
+nIndex := 0;
+
+// =========================================================]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

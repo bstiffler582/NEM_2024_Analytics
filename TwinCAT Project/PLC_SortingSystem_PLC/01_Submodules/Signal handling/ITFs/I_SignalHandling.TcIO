@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.2">
+  <Itf Name="I_SignalHandling" Id="{7a67ff7e-f85f-472d-b8fe-701e6f98e7d6}">
+    <Declaration><![CDATA[INTERFACE I_SignalHandling
+]]></Declaration>
+    <Method Name="Enable" Id="{00e890b2-6b4d-44c6-bfde-6e198da198ed}">
+      <Declaration><![CDATA[METHOD PUBLIC Enable
+VAR_INPUT
+	bEnable		: BOOL;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="SetOutput" Id="{62b6f9c6-c8f0-4157-ae0d-c45d2e4a0bee}">
+      <Declaration><![CDATA[METHOD SetOutput
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <DUT Name="E_StateSeparatingAuto" Id="{397a518a-2dc3-4af9-8dda-5e20e83b8f0f}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_StateSeparatingAuto :
+(
+	Init := 0,
+	Start,
+	CloseClamp,
+	OpenBarrier,
+	CloseBarrier,
+	OpenClamp
+);
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

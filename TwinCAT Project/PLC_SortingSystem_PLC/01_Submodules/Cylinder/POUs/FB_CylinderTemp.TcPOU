@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.2">
+  <POU Name="FB_CylinderTemp" Id="{c2e1a4a1-0f7c-4666-888e-fd18ca51ba5f}" SpecialFunc="None">
+    <Declaration><![CDATA[(* FB_CylinderTemp	- number of control signals:
+							one direction is controllable
+					- type of feedback signal:
+							feedback in base and work position
+					- with temperature signal					*)
+
+FUNCTION_BLOCK FB_CylinderTemp EXTENDS FB_Cylinder
+VAR_INPUT
+	fTempCurrent	AT %I*	: LREAL;		// Hardware input signal: cylinder temperature
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// =========================================================
+;
+// =========================================================]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

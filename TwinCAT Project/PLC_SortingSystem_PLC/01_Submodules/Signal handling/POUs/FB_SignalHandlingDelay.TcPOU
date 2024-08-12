@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.2">
+  <POU Name="FB_SignalHandlingDelay" Id="{fad04b3e-6e95-49a4-8703-60272ddf1ee0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SignalHandlingDelay EXTENDS FB_SignalHandling
+VAR_INPUT
+	tDelay				: TIME;			// Time to delay input signal (time between hardware and processed software signal)
+END_VAR
+VAR
+	bStartProcessing	: BOOL;			// To start the processing/delay of input signal
+	fbTimerDelay		: TON;			// Timer to control the processing/delay of input signal
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// =========================================================
+;
+// =========================================================]]></ST>
+    </Implementation>
+    <Method Name="SetOutput" Id="{2d337ada-1ff4-4ca9-a3f8-017053a79d60}">
+      <Declaration><![CDATA[METHOD SetOutput
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// =========================================================
+
+IF bEnableLocal AND bInput THEN
+	bStartProcessing := TRUE;
+END_IF
+
+IF bStartProcessing THEN
+	fbTimerDelay(	IN := TRUE,
+					PT := tDelay);
+ELSE
+	fbTimerDelay(	IN := FALSE);
+END_IF
+
+IF fbTimerDelay.Q THEN
+	bStartProcessing := FALSE;
+	
+	fbTimerDelay(IN := FALSE);
+	
+	bOut := TRUE;
+ELSE
+	bOut := FALSE;
+END_IF
+			
+// =========================================================]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

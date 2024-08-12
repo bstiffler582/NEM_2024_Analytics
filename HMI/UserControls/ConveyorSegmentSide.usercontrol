@@ -1,0 +1,117 @@
+<div id="ConveyorSegmentSide" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControl" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="100" data-tchmi-height="100" data-tchmi-width-unit="%" data-tchmi-height-unit="%" data-tchmi-creator-viewport-width="500" data-tchmi-creator-viewport-height="360" data-tchmi-height-mode="Content">
+
+<div id="TcHmi_Controls_Beckhoff_TcHmiImage_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-src="Imports/Images/conv2.png" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-right="0" data-tchmi-height-mode="Content" data-tchmi-width-mode="Value">
+</div>
+<div id="shapeConvRun4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiPolygon" data-tchmi-left="8.8" data-tchmi-left-unit="%" data-tchmi-points="0,140 120,0 200,55 80,200" data-tchmi-scale-mode="ScaleToFill" data-tchmi-top="6.5" data-tchmi-top-unit="%" data-tchmi-visibility="Visible" data-tchmi-right="48.6" data-tchmi-bottom="44.9" data-tchmi-right-unit="%" data-tchmi-bottom-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-fill-color" type="application/json">
+{
+  "color": "rgba(125, 125, 125, 0.2941176)"
+}
+</script>
+
+
+
+<script data-tchmi-target-attribute="data-tchmi-stroke-color" type="application/json">
+{
+  "color": "rgba(125, 125, 125, 0.2941176)"
+}
+</script>
+
+
+</div>
+<div id="shapeConvRun5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiPolygon" data-tchmi-left="28.4" data-tchmi-left-unit="%" data-tchmi-points="0,140 120,0 200,55 80,200" data-tchmi-scale-mode="ScaleToFill" data-tchmi-top="22.4" data-tchmi-top-unit="%" data-tchmi-visibility="Visible" data-tchmi-right="29.0" data-tchmi-bottom="29.0" data-tchmi-right-unit="%" data-tchmi-bottom-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-fill-color" type="application/json">
+{
+  "color": "rgba(125, 125, 125, 0.2941176)"
+}
+</script>
+
+
+
+<script data-tchmi-target-attribute="data-tchmi-stroke-color" type="application/json">
+{
+  "color": "rgba(125, 125, 125, 0.2941176)"
+}
+</script>
+
+
+</div>
+<div id="shapeConvRun6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiPolygon" data-tchmi-left="49.4" data-tchmi-left-unit="%" data-tchmi-points="0,140 120,0 200,55 80,200" data-tchmi-scale-mode="ScaleToFill" data-tchmi-top="37.6" data-tchmi-top-unit="%" data-tchmi-visibility="Visible" data-tchmi-right="8.8" data-tchmi-bottom="13.4" data-tchmi-right-unit="%" data-tchmi-bottom-unit="%">
+<script data-tchmi-target-attribute="data-tchmi-fill-color" type="application/json">
+{
+  "color": "rgba(125, 125, 125, 0.2941176)"
+}
+</script>
+
+
+
+<script data-tchmi-target-attribute="data-tchmi-stroke-color" type="application/json">
+{
+  "color": "rgba(125, 125, 125, 0.2941176)"
+}
+</script>
+
+
+</div>
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "%pp%Running%/pp%",
+    "actions": [
+      {
+        "objectType": "Function",
+        "active": true,
+        "fn": "TcHmi.Functions.HMI.AnimateConveyorRun",
+        "fnParams": [
+          {
+            "objectType": "Symbol",
+            "valueType": "tchmi:general#/definitions/Boolean",
+            "symbolExpression": "%pp%Running%/pp%"
+          },
+          {
+            "objectType": "Symbol",
+            "valueType": "tchmi:framework#/definitions/Control",
+            "symbolExpression": "%ctrl%ConveyorSegmentSide%/ctrl%"
+          },
+          {
+            "objectType": "Symbol",
+            "valueType": "tchmi:framework#/definitions/PositiveNumber",
+            "symbolExpression": "%pp%AnimateInterval%/pp%"
+          }
+        ],
+        "asyncWait": true
+      }
+    ]
+  },
+  {
+    "event": "ConveyorSegmentSide.onDetached",
+    "actions": [
+      {
+        "objectType": "Function",
+        "active": true,
+        "fn": "TcHmi.Functions.HMI.AnimateConveyorRun",
+        "fnParams": [
+          {
+            "objectType": "StaticValue",
+            "valueType": "tchmi:general#/definitions/Boolean",
+            "value": false
+          },
+          {
+            "objectType": "Symbol",
+            "valueType": "tchmi:framework#/definitions/Control",
+            "symbolExpression": "%ctrl%ConveyorSegmentSide%/ctrl%"
+          },
+          {
+            "objectType": "StaticValue",
+            "valueType": "tchmi:framework#/definitions/PositiveNumber",
+            "value": 1000.0
+          }
+        ],
+        "asyncWait": true
+      }
+    ]
+  }
+]
+</script>
+</div>

@@ -1,0 +1,77 @@
+{
+    "alarmSymbols": {
+        "PLC1.MAIN.fbMachine.fbVisu.bAccident": {
+            "alarmSettings": {
+                "Box Position Error": {
+                    "alarmTextKey": "AlarmText",
+                    "condition": [
+                        {
+                            "comparator": "==",
+                            "path": "",
+                            "value": true
+                        }
+                    ],
+                    "enabled": true,
+                    "notificationType": 2,
+                    "severity": 3
+                }
+            },
+            "enabled": true,
+            "interval": "PT1S",
+            "onError": false
+        },
+        "PLC1.MAIN.fbMachine.fbVisu.bManual": {
+            "alarmSettings": {
+                "Machine in Manual Mode": {
+                    "alarmTextKey": "AlarmText",
+                    "condition": [
+                        {
+                            "comparator": "==",
+                            "path": "",
+                            "value": true
+                        }
+                    ],
+                    "enabled": true,
+                    "notificationType": 0,
+                    "severity": 2
+                }
+            },
+            "enabled": true,
+            "interval": "PT1S",
+            "onError": false
+        },
+        "PLC1.MAIN.fbMachine.fbVisu.bPowerEnabled": {
+            "alarmSettings": {
+                "Main Power Disabled": {
+                    "alarmTextKey": "AlarmText",
+                    "condition": [
+                        {
+                            "comparator": "==",
+                            "path": "",
+                            "value": false
+                        }
+                    ],
+                    "enabled": true,
+                    "notificationType": 0,
+                    "severity": 2
+                },
+                "Main Power Enabled": {
+                    "alarmTextKey": "AlarmText",
+                    "condition": [
+                        {
+                            "comparator": "==",
+                            "path": "",
+                            "value": true
+                        }
+                    ],
+                    "enabled": true,
+                    "notificationType": 0,
+                    "severity": 1
+                }
+            },
+            "enabled": true,
+            "interval": "PT1S",
+            "onError": false
+        }
+    }
+}

@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.2">
+  <POU Name="FB_CylinderTempDiag" Id="{86c2fa19-6456-4b1a-8c13-2cf695bb8069}" SpecialFunc="None">
+    <Declaration><![CDATA[(* FB_CylinderTempDiag		- number of control signals:
+									one direction is controllable
+							- type of feedback signal:
+									feedback in base and work position
+							- with temperature diagnosis					*)
+
+FUNCTION_BLOCK FB_CylinderTempDiag EXTENDS FB_CylinderTemp
+VAR_INPUT
+	fTempMax		AT %I*	: LREAL;		// Global input signal: maximal allowed cylinder temperature for temperature monitoring
+	fTempMin		AT %I*	: LREAL;		// Global input signal: minimal allowed cylinder temperature for temperature monitoring
+END_VAR
+VAR_OUTPUT
+	bError					: BOOL;			// Error signal (diagnosed from temperature monitoring)
+	sErrorMsg				: STRING;		// Error message
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// =========================================================
+;
+// =========================================================]]></ST>
+    </Implementation>
+    <Method Name="StateMachine" Id="{35c21ffd-3877-4395-9a0f-60eedd911c91}">
+      <Declaration><![CDATA[METHOD PROTECTED StateMachine
+VAR_INPUT
+	bBasePosReq		: BOOL;
+	bWorkPosReq		: BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// =========================================================
+
+IF NOT bError THEN
+	// Calling method StateMachine of base class FB_Cylinder via 'SUPER^.'
+	SUPER^.StateMachine(bBasePosReq := bBasePosReq,
+						bWorkPosReq	:= bWorkPosReq );
+	
+	// Diagnosis
+	Diag();
+END_IF
+
+// =========================================================]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Reset" Id="{6362bc6f-2f7a-4e22-af79-674dd8e60c75}">
+      <Declaration><![CDATA[METHOD Reset
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// =========================================================
+	
+// Calling method Reset of base class FB_Cylinder via 'SUPER^.'
+SUPER^.Reset();			
+
+// Reset error
+bError 		:= FALSE;
+sErrorMsg 	:= '';
+
+// =========================================================]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Diag" Id="{e799b7d6-d444-46cd-af44-fa32a2ec4bec}">
+      <Declaration><![CDATA[METHOD PROTECTED Diag
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// =========================================================
+// Error if temperatur of cylinder is not in accepted interval
+	
+	bError := NOT (fTempCurrent >= fTempMin AND fTempCurrent <= fTempMax);
+	
+	IF bError THEN
+		IF fTempCurrent > fTempMax THEN
+			sErrorMsg := 'Temperature above maximum';
+		ELSE
+			sErrorMsg := 'Temperature below minimum';
+		END_IF
+	ELSE
+		sErrorMsg := '';
+	END_IF
+
+// =========================================================]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

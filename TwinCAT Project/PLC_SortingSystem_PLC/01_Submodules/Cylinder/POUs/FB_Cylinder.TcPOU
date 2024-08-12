@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <POU Name="FB_Cylinder" Id="{049cf0c8-787e-48cd-9dba-779e7bf86b9c}" SpecialFunc="None">
+    <Declaration><![CDATA[(* FB_Cylinder		- number of control signals:
+							one direction is controllable
+					- type of feedback signal:
+							feedback in base and work position		*)
+						
+FUNCTION_BLOCK FB_Cylinder IMPLEMENTS I_Cylinder
+VAR_INPUT
+	bAtBasePos		AT %I*	: BOOL;		// Hardware input signal: cylinder is at base position
+	bAtWorkPos		AT %I*	: BOOL;		// Hardware input signal: cylinder is at work position
+END_VAR
+VAR_OUTPUT
+	bMoveToWork		AT %Q*	: BOOL;		// Hardware output signal to move cylinder to work position
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// =========================================================
+;
+// =========================================================]]></ST>
+    </Implementation>
+    <Property Name="bState_AtBasePos" Id="{c0b0975a-26f1-4b20-88a5-afa52a3876df}">
+      <Declaration><![CDATA[PROPERTY PUBLIC bState_AtBasePos : BOOL]]></Declaration>
+      <Get Name="Get" Id="{f0bf4a4f-2389-4d61-bdc9-c73a151c3463}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bState_AtBasePos := bAtBasePos;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="bState_AtWorkPos" Id="{50b0f44d-9561-4544-8a01-7e892601d662}">
+      <Declaration><![CDATA[PROPERTY PUBLIC bState_AtWorkPos : BOOL]]></Declaration>
+      <Get Name="Get" Id="{8d8443a6-9502-4ef4-bee9-85be4bb5027b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bState_AtWorkPos := bAtWorkPos;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="bState_MoveToWork" Id="{6e781349-f89a-4e7b-9cf8-53327ab40deb}">
+      <Declaration><![CDATA[PROPERTY PUBLIC bState_MoveToWork : BOOL]]></Declaration>
+      <Get Name="Get" Id="{1b73982c-b6aa-4870-aa30-8ad51a8d202c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bState_MoveToWork := bMoveToWork;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="MoveToBase" Id="{1bd60d0a-72f1-4adb-a81d-66a2f8af9c07}">
+      <Declaration><![CDATA[METHOD MoveToBase
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// =========================================================
+	
+StateMachine(	bBasePosReq := TRUE,
+				bWorkPosReq	:= FALSE );
+							
+// =========================================================]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveToWork" Id="{9657ee8e-90c8-45ee-8d0d-3c02ce9d1ba2}">
+      <Declaration><![CDATA[METHOD MoveToWork
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// =========================================================
+	
+StateMachine(	bBasePosReq := FALSE,
+				bWorkPosReq	:= TRUE );
+								
+// =========================================================]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Reset" Id="{ffd7021d-b698-4257-8d7a-ae703597054a}">
+      <Declaration><![CDATA[METHOD Reset
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// =========================================================
+
+bMoveToWork := FALSE;
+
+// =========================================================]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StateMachine" Id="{c854d137-c5dd-4da4-bf25-36bb7c20932d}">
+      <Declaration><![CDATA[METHOD PROTECTED StateMachine
+VAR_INPUT
+	bBasePosReq		: BOOL;
+	bWorkPosReq		: BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// =========================================================
+// Base or work position requested
+		
+	IF bWorkPosReq THEN
+		bMoveToWork := TRUE;
+	END_IF
+	
+	IF bBasePosReq OR NOT bWorkPosReq THEN
+		bMoveToWork := FALSE;
+	END_IF
+
+// =========================================================]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_Cylinder">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.bState_AtBasePos.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.bState_AtWorkPos.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.bState_MoveToWork.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.MoveToBase">
+      <LineId Id="3" Count="4" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.MoveToWork">
+      <LineId Id="3" Count="4" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.Reset">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Cylinder.StateMachine">
+      <LineId Id="3" Count="10" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <Itf Name="I_Cylinder" Id="{999197fd-9016-43c5-9286-554445a30fcc}">
+    <Declaration><![CDATA[INTERFACE I_Cylinder
+]]></Declaration>
+    <Property Name="bState_AtBasePos" Id="{870102fa-bd15-471e-89f6-7f98c7c6a1e1}">
+      <Declaration><![CDATA[PROPERTY bState_AtBasePos : BOOL]]></Declaration>
+      <Get Name="Get" Id="{5f03cda0-73ef-4332-a87e-0bad6e137d09}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="bState_AtWorkPos" Id="{196503f9-7fb0-4e10-b1c6-6ec1d5f973a3}">
+      <Declaration><![CDATA[PROPERTY bState_AtWorkPos : BOOL]]></Declaration>
+      <Get Name="Get" Id="{696b45f5-b3b7-4502-b54f-0ce90e0b7895}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="bState_MoveToWork" Id="{b936c052-6de0-49d1-8917-7b0b5644a0f9}">
+      <Declaration><![CDATA[PROPERTY bState_MoveToWork : BOOL]]></Declaration>
+      <Get Name="Get" Id="{b6ea64c0-3021-4c67-9ff9-6567ec946641}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="MoveToBase" Id="{743e8bca-f87c-47dc-b63d-c43eea822e03}">
+      <Declaration><![CDATA[METHOD MoveToBase
+VAR_INPUT
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="MoveToWork" Id="{d78a2c2e-cf00-47dd-a32e-dbbdb7165b31}">
+      <Declaration><![CDATA[METHOD MoveToWork
+VAR_INPUT
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="Reset" Id="{9f27252d-8587-4a98-b79c-05aaf0568907}">
+      <Declaration><![CDATA[METHOD Reset
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_MachineMode" Id="{2d683e8a-6ff2-4cfd-ad76-683ecda09cdc}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_MachineMode :
+(
+	Idle := 0,
+	Execute := 1,
+	Stopped := 2,
+	Aborted := 3,
+	Starting := 4,
+	Stopping := 5,
+	Aborting := 6,
+	Resetting := 7
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,81 @@
+{
+  "function": {
+    "name": "TranslateConvPos",
+    "namespace": "TcHmi.Functions.HMI",
+    "displayName": "TranslateConvPos",
+    "description": "",
+    "waitMode": "Synchronous",
+    "category": "",
+    "returnValue": {
+      "type": "tchmi:framework#/definitions/TransformList"
+    },
+    "visible": true,
+    "injectContextObject": false,
+    "arguments": [
+      {
+        "name": "Control",
+        "displayName": "Control",
+        "type": "tchmi:framework#/definitions/Control",
+        "description": "control",
+        "defaultValue": null,
+        "required": true,
+        "bindable": true,
+        "restParameter": false,
+        "asReference": false,
+        "allowControlAttributeBindingOptions": false
+      },
+      {
+        "name": "xPos",
+        "displayName": "xPos",
+        "type": "tchmi:project#/definitions/Symbol_Of_Number",
+        "description": "plc x pos",
+        "defaultValue": "",
+        "required": true,
+        "bindable": true,
+        "restParameter": false,
+        "asReference": true,
+        "allowControlAttributeBindingOptions": false
+      },
+      {
+        "name": "yPos",
+        "displayName": "yPos",
+        "type": "tchmi:project#/definitions/Symbol_Of_Number",
+        "description": "plc y pos",
+        "defaultValue": "",
+        "required": true,
+        "bindable": true,
+        "restParameter": false,
+        "asReference": true,
+        "allowControlAttributeBindingOptions": false
+      },
+      {
+        "name": "index",
+        "displayName": "index",
+        "type": "tchmi:general#/definitions/String",
+        "description": "box index",
+        "defaultValue": "",
+        "required": true,
+        "bindable": true,
+        "restParameter": false,
+        "asReference": false,
+        "allowControlAttributeBindingOptions": false
+      }
+    ]
+  },
+  "$schema": "./../../Packages/Beckhoff.TwinCAT.HMI.Framework.12.760.59/runtimes/native1.12-tchmi/Schema/FunctionDescription.Schema.json",
+  "apiVersion": 1,
+  "version": {
+    "full": "0.0.0.0",
+    "major": 0,
+    "minor": 0,
+    "revision": 0,
+    "build": 0
+  },
+  "dependencyFiles": [
+    {
+      "name": "TranslateConvPos.js",
+      "type": "JavaScript",
+      "description": ""
+    }
+  ]
+}

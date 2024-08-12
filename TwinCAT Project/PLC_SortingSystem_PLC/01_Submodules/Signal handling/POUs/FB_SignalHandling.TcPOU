@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.2">
+  <POU Name="FB_SignalHandling" Id="{7260d1df-bedd-4a66-b752-5b09aeca79b4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SignalHandling IMPLEMENTS I_SignalHandling
+VAR_INPUT
+	bInput		AT %I*	: BOOL;			// Hardware input signal, e.g. sensor signal, enable for fuse
+END_VAR
+VAR_OUTPUT
+	bOut		AT %Q* 	: BOOL;			// Processed output signal, e.g. delayed, inverted
+END_VAR
+VAR
+	bEnableLocal		: BOOL;			// Enable processing of input signal
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// =========================================================
+;
+// =========================================================]]></ST>
+    </Implementation>
+    <Method Name="Enable" Id="{d9d37c83-3a6b-458f-81b3-687f7f5f2e99}">
+      <Declaration><![CDATA[METHOD Enable
+VAR_INPUT
+	bEnable		: BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// =========================================================
+// Store input in local variable
+
+	bEnableLocal := bEnable;
+
+// =========================================================]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetOutput" Id="{fe8464d4-4ffc-4cbc-88ef-2e03cb2715b6}">
+      <Declaration><![CDATA[METHOD SetOutput
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// =========================================================
+	
+bOut := bInput AND bEnableLocal;
+
+// =========================================================]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
