@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.56" TcVersionFixed="true">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.59">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-000000000035}" TcBaseType="true" HideType="true">UINTARR2</Name>
@@ -2575,7 +2575,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{2959AC27-45B0-457F-AE01-00E796DADEE7}" Name="PLC_SortingSystem_Simu" PrjFilePath="PLC_SortingSystem_Simu\PLC_SortingSystem_Simu.plcproj" TmcFilePath="PLC_SortingSystem_Simu\PLC_SortingSystem_Simu.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x001e">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="1" TmcPath="PLC_SortingSystem_Simu\PLC_SortingSystem_Simu.tmc" TmcHash="{C5A8A4E7-FA3E-D739-F34B-446E8910D455}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="1" TmcPath="PLC_SortingSystem_Simu\PLC_SortingSystem_Simu.tmc" TmcHash="{1B1122BA-D770-DD41-2196-BD7BEF7CC61C}">
 					<Name>PLC_SortingSystem_Simu Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -2620,6 +2620,10 @@ External Setpoint Generation:
 							<Type GUID="{87A6AA7A-70F5-61FF-2FE0-1908C9F56FD0}">E_PMLState</Type>
 						</Var>
 						<Var>
+							<Name>MAIN_Simu.eMachineState</Name>
+							<Type GUID="{64375A74-DE2D-0C46-D476-2B6A1A2CABD4}">E_MachineMode</Type>
+						</Var>
+						<Var>
 							<Name>MAIN_Simu.fPlasticPosition</Name>
 							<Comment><![CDATA[ =============== Axis Information ======================]]></Comment>
 							<Type>LREAL</Type>
@@ -2643,10 +2647,6 @@ External Setpoint Generation:
 						<Var>
 							<Name>MAIN_Simu.fSeparatingVelocity</Name>
 							<Type>LREAL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN_Simu.eMachineState</Name>
-							<Type GUID="{64375A74-DE2D-0C46-D476-2B6A1A2CABD4}">E_MachineMode</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -2791,7 +2791,7 @@ External Setpoint Generation:
 				</Instance>
 			</Project>
 			<Project GUID="{75DA2F1F-CC3D-470B-A817-A50D020758E9}" Name="PLC_SortingSystem_PLC" PrjFilePath="PLC_SortingSystem_PLC\PLC_SortingSystem_PLC.plcproj" TmcFilePath="PLC_SortingSystem_PLC\PLC_SortingSystem_PLC.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x0002">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="1" TmcPath="PLC_SortingSystem_PLC\PLC_SortingSystem_PLC.tmc" TmcHash="{932433C1-F0F7-3E8F-0B27-5F26BE40AAFE}">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="1" TmcPath="PLC_SortingSystem_PLC\PLC_SortingSystem_PLC.tmc" TmcHash="{DC1049B0-D154-F857-41DA-596600F4A5A2}">
 					<Name>PLC_SortingSystem_PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">

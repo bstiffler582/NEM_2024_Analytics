@@ -192,13 +192,6 @@
     "icon_p": "%tr%TR_Icon_Events_pressed%/tr%"
   },
   {
-    "name": "Analytics",
-    "content": "Pages/Analytics.content",
-    "icon_a": "%tr%TR_Icon_Analytics_active%/tr%",
-    "icon_n": "%tr%TR_Icon_Analytics_normal%/tr%",
-    "icon_p": "%tr%TR_Icon_Analytics_pressed%/tr%"
-  },
-  {
     "name": "%l%L_Settings%/l%",
     "content": "Pages/Settings.content",
     "icon_a": "%tr%TR_Icon_Settings_active%/tr%",
