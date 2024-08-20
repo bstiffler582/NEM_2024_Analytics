@@ -2770,7 +2770,7 @@ External Setpoint Generation:
 					<UnrestoredVarLinks ImportTime="2021-10-21T23:37:43">
 						<OwnerA Name="InputDst" Prefix="TIPC^PLC_SortingSystem_Simu^PLC_SortingSystem_Simu Instance" Type="1">
 							<OwnerB Name="TIPC^PLC_SortingSystem_PLC^PLC_SortingSystem_PLC Instance">
-								<Link VarA="MAIN_Simu.eMachineState" TypeA="E_MachineMode" InOutA="0" GuidA="{52B6FAE5-E9C1-0729-CCB4-A0631A9F0E69}" VarB="PlcTask Outputs^MAIN.eMachineState" RestoreInfo="TypeChanged" IdA="728" RestoreInfo="RestoredWithTypeChange"/>
+								<Link VarA="MAIN_Simu.eMachineState" TypeA="E_MachineMode" InOutA="0" GuidA="{52B6FAE5-E9C1-0729-CCB4-A0631A9F0E69}" VarB="PlcTask Outputs^MAIN.eMachineState" RestoreInfo="TypeChanged" IdA="722" RestoreInfo="RestoredWithTypeChange"/>
 							</OwnerB>
 						</OwnerA>
 					</UnrestoredVarLinks>
@@ -3615,6 +3615,141 @@ External Setpoint Generation:
 				<Stream Caller="#x08502041" Adi="#x08502040" Id="#x02040001" CntAds="#x00000020" CntFile="#x00000010" CntRing="#x00000002" SamplingDivider="1">
 					<Name>PLC_SortingSystem_PLC.PLC_SortingSystem_PLC Instance.PlcTask</Name>
 					<DisplayName>PlcStream2</DisplayName>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbSeparateModule.fbClamp.bAtBasePos</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbSeparateModule.fbClamp.bAtBasePos</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbSeparateModule.fbClamp.bAtWorkPos</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbSeparateModule.fbClamp.bAtWorkPos</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbSeparateModule.fbClampDiag.fVibrationSensor</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbSeparateModule.fbClampDiag.fVibrationSensor</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbSeparateModule.fbClampDiag.fPressureSensor</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbSeparateModule.fbClampDiag.fPressureSensor</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbSeparateModule.fbClampTemp.fTempCurrent</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbSeparateModule.fbClampTemp.fTempCurrent</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbSeparateModule.fbBarrier.bAtBasePos</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbSeparateModule.fbBarrier.bAtBasePos</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbSeparateModule.fbBarrier.bAtWorkPos</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbSeparateModule.fbBarrier.bAtWorkPos</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbSeparateModule.fbBarrierDiag.fVibrationSensor</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbSeparateModule.fbBarrierDiag.fVibrationSensor</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbSeparateModule.fbBarrierDiag.fPressureSensor</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbSeparateModule.fbBarrierDiag.fPressureSensor</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbSeparateModule.fbBarrierTemp.fTempCurrent</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbSeparateModule.fbBarrierTemp.fTempCurrent</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbMetalSorting.fbCylinder.bAtBasePos</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbMetalSorting.fbCylinder.bAtBasePos</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbMetalSorting.fbCylinder.bAtWorkPos</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbMetalSorting.fbCylinder.bAtWorkPos</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbMetalSorting.fbCylinderDiag.fVibrationSensor</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbMetalSorting.fbCylinderDiag.fVibrationSensor</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbMetalSorting.fbCylinderDiag.fPressureSensor</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbMetalSorting.fbCylinderDiag.fPressureSensor</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbMetalSorting.fbCylinderTemp.fTempCurrent</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbMetalSorting.fbCylinderTemp.fTempCurrent</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbPlasticSorting.fbCylinder.bAtBasePos</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbPlasticSorting.fbCylinder.bAtBasePos</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbPlasticSorting.fbCylinder.bAtWorkPos</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbPlasticSorting.fbCylinder.bAtWorkPos</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbPlasticSorting.fbCylinderDiag.fVibrationSensor</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbPlasticSorting.fbCylinderDiag.fVibrationSensor</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbPlasticSorting.fbCylinderDiag.fPressureSensor</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbPlasticSorting.fbCylinderDiag.fPressureSensor</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Inputs</AreaName>
+						<SymName>MAIN.fbMachine.fbPlasticSorting.fbCylinderTemp.fTempCurrent</SymName>
+						<HierName>PlcTask Inputs.MAIN.fbMachine.fbPlasticSorting.fbCylinderTemp.fTempCurrent</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Outputs</AreaName>
+						<SymName>MAIN.eMachineState</SymName>
+						<HierName>PlcTask Outputs.MAIN.eMachineState</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Outputs</AreaName>
+						<SymName>MAIN.Plastic_ActPos</SymName>
+						<HierName>PlcTask Outputs.MAIN.Plastic_ActPos</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Outputs</AreaName>
+						<SymName>MAIN.Plastic_ActVelo</SymName>
+						<HierName>PlcTask Outputs.MAIN.Plastic_ActVelo</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Outputs</AreaName>
+						<SymName>MAIN.Metal_ActPos</SymName>
+						<HierName>PlcTask Outputs.MAIN.Metal_ActPos</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Outputs</AreaName>
+						<SymName>MAIN.Metal_ActVelo</SymName>
+						<HierName>PlcTask Outputs.MAIN.Metal_ActVelo</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Outputs</AreaName>
+						<SymName>MAIN.Separating_ActPos</SymName>
+						<HierName>PlcTask Outputs.MAIN.Separating_ActPos</HierName>
+					</LoggerObject>
+					<LoggerObject Enabled="true">
+						<AreaName>PlcTask Outputs</AreaName>
+						<SymName>MAIN.Separating_ActVelo</SymName>
+						<HierName>PlcTask Outputs.MAIN.Separating_ActVelo</HierName>
+					</LoggerObject>
 					<FileDir>%TC_BOOTPRJPATH%</FileDir>
 				</Stream>
 			</DataLogger>
