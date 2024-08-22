@@ -43,8 +43,7 @@ Data Format                   ANALYTICS_FORMAT_MQTT_BINARY
 ...
 MQTT Host Name                127.0.0.1
 MQTT Tcp Port                 1883
-MQTT Main Topic               TcAnalytics
-MQTT Client ID                SortingPLC1
+MQTT Main Topic               SorterAnalytics
 ```
 
 One stream for each PLC should be automatically created. Our application logic is running on the second PLC instance (port 852), so we will make our Logger selections under **PlcStream2**:
@@ -52,43 +51,36 @@ One stream for each PLC should be automatically created. Our application logic i
 > The symbols are already available via the input and output process images to drive the simulation logic. Otherwise, we would have to add the `{attribute 'TcAnalytics'}` pragma in the symbol declaration for them to show up in this list.
 
 Machine State:
-- `MAIN.eMachineState`
+- `Outputs > MAIN.eMachineState`
 
 Clamp cylinder:
-- `MAIN.fbMachine.fbSeparateModule.fbClamp.bAtBasePos`
-- `MAIN.fbMachine.fbSeparateModule.fbClamp.bAtWorkPos`
-- `MAIN.fbMachine.fbSeparateModule.fbClampDiag.fVibrationSensor`
-- `MAIN.fbMachine.fbSeparateModule.fbClampDiag.fPressureSensor`
-- `MAIN.fbMachine.fbSeparateModule.fbClampTemp.fTempCurrent`
-
-Barrier cylinder:
-- `MAIN.fbMachine.fbSeparateModule.fbBarrier.bAtBasePos`
-- `MAIN.fbMachine.fbSeparateModule.fbBarrier.bAtWorkPos`
-- `MAIN.fbMachine.fbSeparateModule.fbBarrierDiag.fVibrationSensor`
-- `MAIN.fbMachine.fbSeparateModule.fbBarrierDiag.fPressureSensor`
-- `MAIN.fbMachine.fbSeparateModule.fbBarrierTemp.fTempCurrent`
+- `Inputs > MAIN.fbMachine.fbSeparateModule.fbClamp.bAtBasePos`
+- `Inputs > MAIN.fbMachine.fbSeparateModule.fbClamp.bAtWorkPos`
+- `Inputs > MAIN.fbMachine.fbSeparateModule.fbClampDiag.fVibrationSensor`
+- `Inputs > MAIN.fbMachine.fbSeparateModule.fbClampDiag.fPressureSensor`
+- `Inputs > MAIN.fbMachine.fbSeparateModule.fbClampTemp.fTempCurrent`
 
 Metal divert cylinder:
-- `MAIN.fbMachine.fbMetalSorting.fbCylinder.bAtBasePos`
-- `MAIN.fbMachine.fbMetalSorting.fbCylinder.bAtWorkPos`
-- `MAIN.fbMachine.fbMetalSorting.fbCylinderDiag.fVibrationSensor`
-- `MAIN.fbMachine.fbMetalSorting.fbCylinderDiag.fPressureSensor`
-- `MAIN.fbMachine.fbMetalSorting.fbCylinderTemp.fTempCurrent`
+- `Inputs > MAIN.fbMachine.fbMetalSorting.fbCylinder.bAtBasePos`
+- `Inputs > MAIN.fbMachine.fbMetalSorting.fbCylinder.bAtWorkPos`
+- `Inputs > MAIN.fbMachine.fbMetalSorting.fbCylinderDiag.fVibrationSensor`
+- `Inputs > MAIN.fbMachine.fbMetalSorting.fbCylinderDiag.fPressureSensor`
+- `Inputs > MAIN.fbMachine.fbMetalSorting.fbCylinderTemp.fTempCurrent`
 
 Plastic divert cylinder:
-- `MAIN.fbMachine.fbPlasticSorting.fbCylinder.bAtBasePos`
-- `MAIN.fbMachine.fbPlasticSorting.fbCylinder.bAtWorkPos`
-- `MAIN.fbMachine.fbPlasticSorting.fbCylinderDiag.fVibrationSensor`
-- `MAIN.fbMachine.fbPlasticSorting.fbCylinderDiag.fPressureSensor`
-- `MAIN.fbMachine.fbPlasticSorting.fbCylinderTemp.fTempCurrent`
+- `Inputs > MAIN.fbMachine.fbPlasticSorting.fbCylinder.bAtBasePos`
+- `Inputs > MAIN.fbMachine.fbPlasticSorting.fbCylinder.bAtWorkPos`
+- `Inputs > MAIN.fbMachine.fbPlasticSorting.fbCylinderDiag.fVibrationSensor`
+- `Inputs > MAIN.fbMachine.fbPlasticSorting.fbCylinderDiag.fPressureSensor`
+- `Inputs > MAIN.fbMachine.fbPlasticSorting.fbCylinderTemp.fTempCurrent`
 
 Conveyors:
-- `MAIN.Separating_ActPos`
-- `MAIN.Separating_ActVelo`
-- `MAIN.Metal_ActPos`
-- `MAIN.Metal_ActVelo`
-- `MAIN.Plastic_ActPos`
-- `MAIN.Plastic_ActVelo`
+- `Outputs > MAIN.Separating_ActPos`
+- `Outputs > MAIN.Separating_ActVelo`
+- `Outputs > MAIN.Metal_ActPos`
+- `Outputs > MAIN.Metal_ActVelo`
+- `Outputs > MAIN.Plastic_ActPos`
+- `Outputs > MAIN.Plastic_ActVelo`
 
 > Notice that there are fewer available configuration options under the stream's "Data Handling" tab. This is because we are not persisting the data locally. The logger and stream are only responsible for publishing the data upstream to the broker.
 
@@ -123,10 +115,10 @@ In addition to starting the recordings through this interface, we can programmat
 
 Open a PowerShell or CMD window, and `cd` to `C:\TwinCAT\Functions\TF3520-Analytics-StorageProvider\Client`. Enter the following command, replacing the username and provider GUID with your own:
 ```ps
-.\TwinCAT.Analytics.StorageProvider.Client.exe 
-    -ConfigFile "C:\Users\[Username]\AppData\Roaming\Beckhoff\TwinCAT Analytics Storage Provider\TcAnalyticsStorageProvider_Recorder.xml"
-    -ProviderGuid your-provider-guid-sorry-notfun-totype
-    -StartRecord
+.\TwinCAT.Analytics.StorageProvider.Client.exe `
+    -ConfigFile "C:\Users\[Username]\AppData\Roaming\Beckhoff\TwinCAT Analytics Storage Provider\TcAnalyticsStorageProvider_Recorder.xml" `
+    -ProviderGuid your-provider-guid-sorry-notfun-totype `
+    -StartRecord `
     -ConfigCmdAlias Triggered
 ```
 And observe another one minute CSV recording start.
@@ -135,7 +127,7 @@ And observe another one minute CSV recording start.
 
 ### 4. Analytics Workbench
 
-Now that we have real time and historical data being captured by the Storage Provider, we can use the Analytics Workbench to analyze our process. Open a new XaeShell instance and create a new TwinCAT Analytics project.
+Now that we have real time and historical data being captured by the Storage Provider, we can use the Analytics Workbench to analyze our process. Add a new Analytics project to your solution.
 
 For starters, we will build out basic high-level machine analysis. Even though we have not implemented any metrics in the PLC logic, we can measure things like run time, stop time and cycle time within Workbench using the algorithms.
 
@@ -152,7 +144,7 @@ For starters, we will build out basic high-level machine analysis. Even though w
 
 Make sure to give each algorithm a name, so that the analysis is easy to follow.
 
->**Visualizations:** Add HMI controls to applicable algorithms. Notice in the solution tree under "Dashboard", content and controls are automatically added based on your selections. You can customize mappings between the output values of the algorithms and the elements of the HMI control.
+>**Visualizations:** Add HMI controls to applicable algorithms. Notice in the solution tree under "Dashboard", content and controls are automatically added based on your selections. You can customize mappings between the output values of the algorithms and the elements of the HMI control. Manually create a dashboard control to display the cycle time as a "Single Value".
 
 - Add a new empty network "CylinderStatus_Clamp", targeting `MAIN.fbSeparateModule.fbClamp`, with algorithms to calculate the following:
     - Cylinder actuation time (`NOT bAtBasePos`)
@@ -190,3 +182,5 @@ On the top level "Analytics Project" node, right-click and select the "Deploy Ru
 - Results streaming = backfeeding algorithm results to the PLC, Analytics file or MQTT broker
 - HMI Dashboard - elect to generate this if you have TE2000 installed
 - View summary and deploy
+
+Open the generated solution and peruse the results.
